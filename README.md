@@ -1,18 +1,15 @@
 [![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-f4981d0f882b2a3f0472912d15f9806d57e124e0fc890972558857b51b24a6f9.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=10527339)
-# Nome do projeto
-Escreva um ou dois parágrafos resumindo o objetivo do seu projeto.
+# Algoritmos em Grafos
+Os Grafos podem ser usados para resolver diversos problemas de relacionamento entre grandes conjuntos de dados, de modo que retorne alguma informação mais útil ao usuário. Sendo assimo, nosso objetivo é criar um algoritmo capaz de agilizar o processo de utilização dos grafos.
 
 ## Alunos integrantes da equipe
 
-* Nome completo do aluno 1
-* Nome completo do aluno 2
-* Nome completo do aluno 3
-* Nome completo do aluno 4
-* Nome completo do aluno 4
-* Nome completo do aluno 4
+* Augusto Baldiotti Mendonça Alvares
+* Caio Elias Rodrigues Araujo
+* Daniel de Rezende Leão
+* Vitor Lany Freitas Ferreira
 
 ## Professores responsáveis
 
-* Nome completo do professor 1
-* Nome completo do professor 2
+* João Caram Santos de Oliveira
 
