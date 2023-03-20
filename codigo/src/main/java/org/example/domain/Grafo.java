@@ -23,7 +23,16 @@ package org.example.domain;
  * SOFTWARE.
  */
 
-/** 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
  * Classe básica para um Grafo simples não direcionado.
  */
 public class Grafo {
@@ -35,11 +44,11 @@ public class Grafo {
     }
 
     /**
-     * Construtor. Cria um grafo vazio com um nome escolhido pelo usuário. Em caso de nome não informado 
+     * Construtor. Cria um grafo vazio com um nome escolhido pelo usuário. Em caso de nome não informado
      * (string vazia), recebe o nome genérico "Grafo"
      */
     public Grafo(String nome){
-        if(nome.length()==0) 
+        if(nome.length()==0)
             this.nome = "Grafo";
         else
             this.nome = nome;
@@ -54,15 +63,35 @@ public class Grafo {
         return this.nome;
     }
 
+    /**
+     * Adiciona um método para ler o grafo, arestas e vértices presentes no arquivo
+     * @param nomeArquivo
+     * @throws IOException
+     */
+    public void carregar(String nomeArquivo) throws IOException {
+        Path path = Paths.get("./data/" + nomeArquivo + ".txt").normalize();
+        Pattern pattern = Pattern.compile("\\d+");
 
-    public void carregar(String nomeArquivo){
+        for (String line : Files.readAllLines(path)) {
+            Matcher matcher = pattern.matcher(line);
+            List<Integer> list = new LinkedList<>();
 
+            while (matcher.find()) {
+                String group = matcher.group();
+                list.add(Integer.valueOf(group));
+            }
+
+            this.addVertice(list.get(0));
+            this.addVertice(list.get(1));
+
+            this.addAresta(list.get(0), list.get(1), 1);
+        }
     }
 
     public void salvar(String nomeArquivo){
-        
+
     }
-    
+
     /**
      * Adiciona um vértice com o id especificado. Ignora a ação e retorna false se já existir
      * um vértice com este id
@@ -83,7 +112,7 @@ public class Grafo {
     }
 
     /**
-     * Adiciona uma aresta entre dois vértices do grafo, caso os dois vértices existam no grafo. 
+     * Adiciona uma aresta entre dois vértices do grafo, caso os dois vértices existam no grafo.
      * Caso a aresta já exista, ou algum dos vértices não existir, o comando é ignorado e retorna FALSE.
      * @param origem Vértice de origem
      * @param destino Vértice de destino
@@ -109,18 +138,18 @@ public class Grafo {
     public Aresta existeAresta(int verticeA, int verticeB){
        return null;
     }
-    
-    
+
+
     public boolean completo(){
        return false;
     }
 
     public Grafo subGrafo(Lista<Integer> vertices){
         Grafo subgrafo = new Grafo("Subgrafo de "+this.nome);
-        
+
         return subgrafo;
     }
-    
+
     public int tamanho(){
         return Integer.MIN_VALUE;
     }
