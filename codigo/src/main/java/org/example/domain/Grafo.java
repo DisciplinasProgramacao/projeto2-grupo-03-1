@@ -84,7 +84,7 @@ public class Grafo {
             this.addVertice(list.get(0));
             this.addVertice(list.get(1));
 
-            this.addAresta(list.get(0), list.get(1), 1);
+            this.addAresta(list.get(0), list.get(1), list.get(2));
         }
     }
 
