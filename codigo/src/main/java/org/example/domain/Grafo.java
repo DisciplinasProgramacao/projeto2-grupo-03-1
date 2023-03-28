@@ -39,8 +39,15 @@ public class Grafo {
     public final String nome;
     private ABB<Vertice> vertices;
 
-    public static Grafo grafoCompleto(int ordem){
-        return null;
+    public static Grafo grafoCompleto(int ordem) {
+        Grafo g = new Grafo("Completo");
+        for(int i = 1; i != ordem; i++) {
+            g.addVertice(i);
+            for(int j = ordem; j > i; j--) {
+                g.addAresta(i, j, 0);
+            }
+        }
+        return g;
     }
 
     /**
