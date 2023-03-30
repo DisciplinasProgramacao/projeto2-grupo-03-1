@@ -47,25 +47,35 @@ public class Vertice {
     public int getId(){
         return this.id;
     }
-    
+
+
+     /**
+      * Adiciona uma aresta não ponderada neste vértice para um destino
+      * @param destino Vértice de destino
+      * @return TRUE se foi inserida, FALSE caso já existisse e não foi inserida.
+      */
     public boolean addAresta(int destino){
-        return false;
+        return this.addAresta(destino, 1);
     }
 
     /**
      * Adiciona uma aresta ponderada neste vértice para um destino
      * @param peso Peso da aresta 
-     * @param dest Vértice de destino
+     * @param destino Vértice de destino
      * @return TRUE se foi inserida, FALSE caso já existisse e não foi inserida.
      */
     public boolean addAresta(int destino, int peso){
-        return this.arestas.add(destino,new Aresta(peso, destino));
+        return this.arestas.add(destino, new Aresta(peso, destino));
     }
 
-    
-    public Aresta existeAresta(int destino){
-        return null;
 
+     /**
+      * Retorna a aresta com o destino indicado
+      * @param destino
+      * @return
+      */
+    public Aresta existeAresta(int destino){
+        return this.arestas.find(destino);
     }
     
     /**
@@ -76,10 +86,14 @@ public class Vertice {
     public Aresta removeAresta(int destino){
         return this.arestas.remove(destino);
     }
-  
-  
+
+
+     /**
+      * Retorna o grau do vértice atual
+      * @return grau
+      */
     public int grau(){
-        return Integer.MIN_VALUE;
+        return this.arestas.size();
     }
 
     /**
