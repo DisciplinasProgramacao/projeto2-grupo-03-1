@@ -162,14 +162,12 @@ public class Grafo {
         for (int i = 0; i < todos.length; i++){
             subgrafo.addVertice(todos[i]);
         }
-        for (int i = 0; i < todos.length; i++){
-            subgrafo.addAresta(todos[i])
+        for (Aresta a : vertices.getArestas()) {
+            if (subgrafo.existeVertice(a.destino()) && subgrafo.existeVertice(a.visitada())) {
+            subgrafo.addAresta(a); 
+            }
         }
-
-
-
           return subgrafo;  
-        }
 
     }
 
