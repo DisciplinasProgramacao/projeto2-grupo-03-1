@@ -119,6 +119,6 @@ public class Vertice {
     }
 
     public ABB<Aresta> getArestas() {    
-        return this.arestas.clone();
+        return this.arestas;
     }
 }

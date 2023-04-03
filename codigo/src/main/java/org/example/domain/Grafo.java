@@ -23,6 +23,8 @@ package org.example.domain;
  * SOFTWARE.
  */
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -95,8 +97,27 @@ public class Grafo {
         }
     }
 
+    /**
+     * Adiciona um método para salvar o grafo
+     * @param nomeArquivo
+     */
     public void salvar(String nomeArquivo){
-
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomeArquivo))) {
+            for (int verticeId : vertices.data.keySet()) {
+                Vertice vertice = vertices.find(verticeId);
+                ABB<Aresta> arestas = vertice.getArestas();
+                for (int destinoId : arestas.data.keySet()) {
+                    Aresta aresta = arestas.find(destinoId);
+                    if (verticeId < destinoId) { // Evita duplicidade de arestas no arquivo
+                        String linha = vertice.getId() + " " + aresta.destino() + " " + aresta.peso();
+                        writer.write(linha);
+                        writer.newLine();
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar o grafo no arquivo: " + e.getMessage());
+        }
     }
 
     /**
