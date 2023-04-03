@@ -151,10 +151,26 @@ public class Grafo {
        return false;
     }
 
-    public Grafo subGrafo(Lista<Integer> vertices){
-        Grafo subgrafo = new Grafo("Subgrafo de "+this.nome);
+    public Vertice getVertice(int vertice) {
+        // TODO: método que volte o vertice
+    }
 
-        return subgrafo;
+    public Grafo subGrafo(Lista<Integer> vertices){
+        Grafo subgrafo = new Grafo("Subgrafo de " + this.nome);
+        Integer todos[] = new Integer[vertices.size()];
+        todos = vertices.allElements(todos);
+        for (int i = 0; i < todos.length; i++){
+            subgrafo.addVertice(todos[i]);
+        }
+        for (int i = 0; i < todos.length; i++){
+            subgrafo.addAresta(todos[i])
+        }
+
+
+
+          return subgrafo;  
+        }
+
     }
 
     public int tamanho(){

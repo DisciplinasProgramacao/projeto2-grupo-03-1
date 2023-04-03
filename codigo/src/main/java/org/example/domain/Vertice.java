@@ -117,4 +117,8 @@ public class Vertice {
     public boolean visitado(){
         return this.visitado;
     }
+
+    public ABB<Aresta> getArestas() {    
+        return this.arestas.clone();
+    }
 }
