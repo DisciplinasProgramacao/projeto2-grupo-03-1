@@ -200,4 +200,15 @@ public class Grafo {
         return Integer.MIN_VALUE;
     }
 
+    public void BuscaProfundiade(vertice){
+        int t=0;
+        for(Vertice v: Grafo.getVertices){
+            int td[v] = 0;
+            int tt[v] = 0;
+            String pai[v] = null;
+        }
+        while()
+       
+    }
+
 }
