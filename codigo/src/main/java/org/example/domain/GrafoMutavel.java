@@ -6,20 +6,35 @@ public class GrafoMutavel extends Grafo {
         super(nome);
     }
 
+    /**
+     * Adiciona um vértice com o id especificado. Ignora a ação e retorna false se já existir
+     * um vértice com este id
+     * @param id O identificador do vértice a ser criado/adicionado
+     * @return TRUE se houve a inclusão do vértice, FALSE se já existia vértice com este id
+     */
     public boolean addVertice(int id) {
-        return false;
+        return super.addVertice(id);
     }
 
+    /**
+     * Remove um vértice do grafo
+     */
     public Vertice removeVertice(int id) {
-        return new Vertice(-1);
+        return super.removeVertice(id);
     }
 
+    /**
+     * Adiciona aresta ao grafo
+     */
     public boolean addAresta(int origem, int destino) {
-        return false;
+        return super.addAresta(origem, destino, destino);
     }
 
+    /**
+     * Remove aresta do vértice
+     */
     public Aresta removeAresta(int id, int destino) {
-        return new Aresta(-1, -2);
+        return super.removeAresta(id, destino);
     }
 
     public void carregar(String nomeArquivo) {
