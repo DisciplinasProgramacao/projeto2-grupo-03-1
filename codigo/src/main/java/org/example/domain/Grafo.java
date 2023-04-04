@@ -126,12 +126,12 @@ public class Grafo {
      * @param id O identificador do vértice a ser criado/adicionado
      * @return TRUE se houve a inclusão do vértice, FALSE se já existia vértice com este id
      */
-    public boolean addVertice(int id){
+    protected boolean addVertice(int id){
         Vertice novo = new Vertice(id);
         return this.vertices.add(id, novo);
     }
 
-    public Vertice removeVertice(int id){
+    protected Vertice removeVertice(int id){
         return null;
     }
 
@@ -147,7 +147,7 @@ public class Grafo {
      * @param peso Peso da aresta
      * @return TRUE se foi inserida, FALSE caso contrário
      */
-    public boolean addAresta(int origem, int destino, int peso){
+    protected boolean addAresta(int origem, int destino, int peso){
         boolean adicionou = false;
         Vertice saida = this.existeVertice(origem);
         Vertice chegada = this.existeVertice(destino);
@@ -159,7 +159,7 @@ public class Grafo {
     }
 
 
-    public Aresta removeAresta(int origem, int destino){
+    protected Aresta removeAresta(int origem, int destino){
         return null;
     }
 
@@ -174,6 +174,7 @@ public class Grafo {
 
     public Vertice getVertice(int vertice) {
         // TODO: método que volte o vertice
+        return new Vertice(-1);
     }
 
     public Grafo subGrafo(Lista<Integer> vertices){
