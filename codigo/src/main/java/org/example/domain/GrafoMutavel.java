@@ -18,7 +18,7 @@ public class GrafoMutavel extends Grafo {
         return false;
     }
 
-    public Aresta removeAresta(int id) {
+    public Aresta removeAresta(int id, int destino) {
         return new Aresta(-1, -2);
     }
 
