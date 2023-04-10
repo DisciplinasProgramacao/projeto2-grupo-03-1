@@ -24,6 +24,7 @@ package org.example.domain;
  */
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -39,6 +40,7 @@ import java.util.regex.Pattern;
  */
 public class Grafo {
     public final String nome;
+<<<<<<< Updated upstream
     private ABB<Vertice> vertices;
 
     public static Grafo grafoCompleto(int ordem) {
@@ -51,6 +53,9 @@ public class Grafo {
         }
         return g;
     }
+=======
+    protected ABB<Vertice> vertices;
+>>>>>>> Stashed changes
 
     /**
      * Construtor. Cria um grafo vazio com um nome escolhido pelo usuário. Em caso de nome não informado
@@ -62,6 +67,17 @@ public class Grafo {
         else
             this.nome = nome;
         this.vertices = new ABB<>();
+    }
+
+    /**
+     * Construtor de um grafo completo com ordem passada por parâmetro
+     * @param ordem
+     * @return
+     */
+    public static Grafo grafoCompleto(int ordem) {
+        GrafoCompleto grafoCompleto = new GrafoCompleto(ordem);
+
+        return grafoCompleto;
     }
 
     /**
@@ -97,6 +113,7 @@ public class Grafo {
         }
     }
 
+<<<<<<< Updated upstream
     /**
      * Adiciona um método para salvar o grafo
      * @param nomeArquivo
@@ -119,6 +136,10 @@ public class Grafo {
             System.out.println("Erro ao salvar o grafo no arquivo: " + e.getMessage());
         }
     }
+=======
+
+    
+>>>>>>> Stashed changes
 
     /**
      * Adiciona um vértice com o id especificado. Ignora a ação e retorna false se já existir
@@ -170,10 +191,13 @@ public class Grafo {
 
     public boolean completo(){
        return false;
+<<<<<<< Updated upstream
     }
 
     public Vertice getVertice(int vertice) {
         // TODO: método que volte o vertice
+=======
+>>>>>>> Stashed changes
     }
 
     public Grafo subGrafo(Lista<Integer> vertices){
@@ -196,8 +220,44 @@ public class Grafo {
         return Integer.MIN_VALUE;
     }
 
+<<<<<<< Updated upstream
+=======
+    /**
+     * Retorna a ordem do grafo
+     * @return ordem do grafo
+     */
+>>>>>>> Stashed changes
     public int ordem(){
         return Integer.MIN_VALUE;
     }
 
+<<<<<<< Updated upstream
+=======
+    /**
+     * Retorna um array com todos os vértices
+     * @return todosVertices é um array com todos os vértices de um grafo
+     */
+    public Vertice[] todosVertices() {
+    	Vertice[] todosVertices = new Vertice[vertices.size()];
+		todosVertices = vertices.allElements(todosVertices);
+		return todosVertices;
+    }
+
+    public void salvar(String nomeArquivo) {
+        try {
+            FileWriter fw = new FileWriter(nomeArquivo+".txt");
+
+            Vertice[] todosVertices = todosVertices();
+            for (Vertice vertice : todosVertices) {
+                    for (Aresta aresta : vertice.todasArestas()) {
+                            fw.write(vertice.getId() + " " + aresta.destino() + " " + aresta.peso() +"\n");
+                    }
+            }
+        fw.close();
+        } catch (IOException e) {
+            System.out.println("Erro no salvamento");
+        }
+    }
+
+>>>>>>> Stashed changes
 }

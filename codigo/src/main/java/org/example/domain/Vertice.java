@@ -55,7 +55,7 @@ public class Vertice {
       * @return TRUE se foi inserida, FALSE caso já existisse e não foi inserida.
       */
     public boolean addAresta(int destino){
-        return this.addAresta(destino, 1);
+        return this.arestas.add(destino, new Aresta(-1, destino));
     }
 
     /**
@@ -120,5 +120,14 @@ public class Vertice {
 
     public ABB<Aresta> getArestas() {    
         return this.arestas;
+    }
+
+
+    /**
+     * Retorno uma lista com todas as arestas de um grafo
+     * @return Lista de arestas do grafo
+     */
+    public Aresta[] todasArestas() {
+    	return this.arestas.allElements(new Aresta[] {});
     }
 }
