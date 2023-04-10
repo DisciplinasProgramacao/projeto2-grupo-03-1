@@ -118,6 +118,19 @@ public class Vertice {
         return this.visitado;
     }
 
+    public Lista<Integer> vizinhos() {
+        Lista<Integer> vizinhos = new Lista<Integer>();
+        Aresta arest[] = new Aresta[arestas.size()];
+        this.arestas.allElements(arest);
+        for (int i = 0; i < arestas.size(); i++) {
+            int aresta = arest[i].destino();
+            if (aresta != id) {
+                vizinhos.add(aresta);
+            }
+        }
+        return vizinhos;
+    }
+
     public ABB<Aresta> getArestas() {    
         return this.arestas;
     }

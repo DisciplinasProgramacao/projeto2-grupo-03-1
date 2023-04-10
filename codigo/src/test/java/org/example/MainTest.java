@@ -4,9 +4,11 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
+import org.example.domain.Aresta;
 import org.example.domain.Grafo;
 import org.example.domain.GrafoCompleto;
+import org.example.domain.Lista;
+import org.example.domain.Vertice;
 
 class MainTest {
     Grafo grafo;
@@ -110,5 +112,18 @@ class MainTest {
         Grafo grafoCompleto = new GrafoCompleto(4);
         assertEquals(grafoCompleto.ordem(), 4);
         assertEquals(grafoCompleto.tamanho(), 6);
+    }
+
+    @Test
+    public void testVizinhos() {
+        Vertice v = grafo.getVertice(2);
+        Integer arest[] = new Integer[v.vizinhos().size()];
+        arest = v.vizinhos().allElements(arest);
+        Integer result[] = new Integer[2];
+        result[0]=1;
+        result[1]=3;
+        for(int i=0; i<v.vizinhos().size(); i++) {
+            assertEquals(arest[i], result[i]);
+        }
     }
 }
