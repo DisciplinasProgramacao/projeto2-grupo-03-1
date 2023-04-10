@@ -118,6 +118,10 @@ public class Vertice {
         return this.visitado;
     }
 
+    /**
+     * Retorna os vizinhos do vértice por meio de uma Lista de Inteiros
+     * @return Lista de Inteiros com os vizinhos.
+     */
     public Lista<Integer> vizinhos() {
         Lista<Integer> vizinhos = new Lista<Integer>();
         Aresta arest[] = new Aresta[arestas.size()];

@@ -2,6 +2,10 @@ package org.example.domain;
 
 public class GrafoCompleto extends Grafo {
 
+
+    /**
+     * Construtor. Cria um grafo completo com um nome que fala sua ordem. 
+     */
     public GrafoCompleto(int ordem) {
         super("Grafo completo - ordem " + ordem);
 
