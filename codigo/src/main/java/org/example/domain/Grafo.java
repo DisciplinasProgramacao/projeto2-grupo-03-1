@@ -193,16 +193,37 @@ public class Grafo {
 
     public Grafo subGrafo(Lista<Integer> vertices){
         Grafo subgrafo = new Grafo("Subgrafo de " + this.nome);
+        //Vertice[] listaVertices = this.vertices.allElements(new Vertice[this.vertices.size()]);
+
+        //coleta os indices da lista-parametro
         Integer todos[] = new Integer[vertices.size()];
         todos = vertices.allElements(todos);
+        
+        //cria os vertices da lista no subgrafo
+
         for (int i = 0; i < todos.length; i++){
             subgrafo.addVertice(todos[i]);
         }
-        for (Aresta a : vertices.getArestas()) {
-            if (subgrafo.existeVertice(a.destino()) && subgrafo.existeVertice(a.visitada())) {
-            subgrafo.addAresta(a); 
+
+        //para cada vertice da lista
+        for (Integer id : todos) {
+            
+            //pergutamos se tem aresta para os outros da lista no grafo original
+            for (Integer idOutro : todos) {
+                if(idOutro!=id){
+                    Aresta qual = this.existeAresta(id, idOutro);
+                    if( qual !=null){
+                        subgrafo.addAresta(id, idOutro, qual.peso());   //se tiver, adiciona no subg
+                    }
+                }
             }
         }
+       
+        // for (Aresta a : vertices.allElements()) {
+        //     if (subgrafo.existeVertice(a.destino()) && subgrafo.existeVertice(a.visitada())) {
+        //     subgrafo.addAresta(v, a.destino()); 
+        //     }
+        // }
           return subgrafo;  
 
     }
