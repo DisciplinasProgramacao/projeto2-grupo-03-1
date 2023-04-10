@@ -96,11 +96,12 @@ public class Grafo {
             this.addAresta(list.get(0), list.get(1), list.get(2));
         }
     }
-
+    
     /**
      * Adiciona um método para salvar o grafo
      * @param nomeArquivo
      */
+    
     public void salvar(String nomeArquivo){
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomeArquivo))) {
             for (int verticeId : vertices.data.keySet()) {
@@ -132,11 +133,11 @@ public class Grafo {
     }
 
     public Vertice removeVertice(int id){
-        return null;
+        return this.vertices.remove(id);
     }
 
     public Vertice existeVertice(int idVertice){
-        return null;
+        return this.vertices.find(idVertice);
     }
 
     /**
@@ -160,20 +161,34 @@ public class Grafo {
 
 
     public Aresta removeAresta(int origem, int destino){
+        Vertice vertA = this.existeVertice(origem);
+        Vertice vertB = this.existeVertice(destino);
+        Aresta aresta = existeAresta(origem, destino);
+        if (aresta != null) {
+            vertB.removeAresta(origem);
+            return vertA.removeAresta(destino);
+        }
         return null;
     }
 
     public Aresta existeAresta(int verticeA, int verticeB){
-       return null;
+        Vertice vertA = this.existeVertice(verticeA);
+        Vertice vertB = this.existeVertice(verticeB);
+        if(vertA != null && vertB != null){
+            Aresta aresta = vertA.existeAresta(verticeB);
+            if(aresta != null)
+                return aresta;
+        }
+        return null;
     }
 
 
     public boolean completo(){
-       return false;
+        return ordem() * (ordem() - 1) == tamanho() * 2;
     }
 
     public Vertice getVertice(int vertice) {
-        // TODO: método que volte o vertice
+        return this.vertices.find(vertice);
     }
 
     public Grafo subGrafo(Lista<Integer> vertices){
@@ -192,12 +207,31 @@ public class Grafo {
 
     }
 
+
+    /**
+     * Retorna o número de arestas do grafo (tamanho)
+     * 
+     * @return O tamanho do grafo
+     */
     public int tamanho(){
-        return Integer.MIN_VALUE;
+        int cont = 0;
+
+        Vertice aV[] = new Vertice[vertices.size()];
+        vertices.allElements(aV);
+        for (Vertice v : aV) {
+            cont += v.grau();
+        }
+        return cont/2;
     }
 
+
+    /** 
+     * Retorna o número de vértices do grafo (ordem)
+     * 
+     * @return A ordem do grafo
+     */
     public int ordem(){
-        return Integer.MIN_VALUE;
+        return this.vertices.size();
     }
 
     public void BuscaProfundiade(vertice){
