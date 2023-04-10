@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 import org.example.domain.Grafo;
+import org.example.domain.GrafoCompleto;
 
 class MainTest {
     Grafo grafo;
@@ -102,5 +103,12 @@ class MainTest {
         assertEquals(grafo.ordem(), 3);
         grafo.removeVertice(1);
         assertEquals(grafo.ordem(), 2);
+    }
+
+    @Test
+    public void testGrafoCompleto() {
+        Grafo grafoCompleto = new GrafoCompleto(4);
+        assertEquals(grafoCompleto.ordem(), 4);
+        assertEquals(grafoCompleto.tamanho(), 6);
     }
 }
