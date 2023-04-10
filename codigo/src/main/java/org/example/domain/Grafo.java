@@ -258,22 +258,31 @@ public class Grafo {
 
     
         // executa a busca em profundidade a partir do vértice v
-            void DFS(int v, boolean visitados[]) {
-        // marca o vértice como visitado e o imprime
-            visitados[v] = true;
-            //System.out.print(v + " ");
+            public void DFS(int idVertice, boolean visitados[]) {
+            // marca o vértice como visitado e o imprime
+            visitados[idVertice] = true;
 
-        // recursivamente, visita todos os vértices adjacentes ao vértice atual
-        Iterator<Integer> i = adj[v].listIterator();
-        while (i.hasNext()) {
-            int n = i.next();
-            if (!visitados[n])
-                DFS(n, visitados);
-        }
-        // realiza a busca em profundidade em todos os vértices
-            void buscaEmProfundidade(int v) {
-             boolean visitados[] = new boolean[V];
-             DFS(v, visitados);
+            // recursivamente, visita todos os vértices adjacentes ao vértice atual
+            Iterator<Integer> i = adj[v].listIterator();
+            while (i.hasNext()) {
+                int n = i.next();
+                if (!visitados[n])
+                    DFS(n, visitados);
             }
+            // realiza a busca em profundidade em todos os vértices
+                void buscaEmProfundidade(int v) {
+                 boolean visitados[] = new boolean[V];
+                 DFS(v, visitados);
+                }
         }
 }
+
+                //public void buscaProfundidade(int idVertice) {
+                //    visitado[idVertice] = true;
+                //    List<Integer> vizinhos = grafo.getVizinhos(idVertice);
+                //    for (int vizinho : vizinhos) {
+                //        if (!visitado[vizinho]) {
+                //            buscaProfundidade(vizinho);
+                //        }
+                //    }
+                //}
