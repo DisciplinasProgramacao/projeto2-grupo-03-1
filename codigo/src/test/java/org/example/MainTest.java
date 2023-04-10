@@ -4,10 +4,8 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.example.domain.Aresta;
 import org.example.domain.Grafo;
 import org.example.domain.GrafoCompleto;
-import org.example.domain.Lista;
 import org.example.domain.Vertice;
 
 class MainTest {

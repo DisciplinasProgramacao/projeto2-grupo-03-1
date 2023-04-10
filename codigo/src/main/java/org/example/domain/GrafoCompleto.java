@@ -5,7 +5,7 @@ public class GrafoCompleto extends Grafo {
     public GrafoCompleto(int ordem) {
         super("Grafo completo - ordem " + ordem);
 
-        ordem = ++ordem;
+        ordem = ordem + 1;
         for(int i = 1; i < ordem; i++) {
             addVertice(i);
         }
