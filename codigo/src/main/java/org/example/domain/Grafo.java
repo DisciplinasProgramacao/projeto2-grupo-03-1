@@ -40,6 +40,7 @@ import java.util.regex.Pattern;
 public class Grafo {
     public final String nome;
     private ABB<Vertice> vertices;
+    private LinkedList<Integer> adj[]; // lista de adjacência
 
     public static Grafo grafoCompleto(int ordem) {
         Grafo g = new Grafo("Completo");
@@ -255,15 +256,24 @@ public class Grafo {
         return this.vertices.size();
     }
 
-    public void BuscaProfundiade(vertice){
-        int t=0;
-        for(Vertice v: Grafo.getVertices){
-            int td[v] = 0;
-            int tt[v] = 0;
-            String pai[v] = null;
-        }
-        while()
-       
-    }
+    
+        // executa a busca em profundidade a partir do vértice v
+            void DFS(int v, boolean visitados[]) {
+        // marca o vértice como visitado e o imprime
+            visitados[v] = true;
+            //System.out.print(v + " ");
 
+        // recursivamente, visita todos os vértices adjacentes ao vértice atual
+        Iterator<Integer> i = adj[v].listIterator();
+        while (i.hasNext()) {
+            int n = i.next();
+            if (!visitados[n])
+                DFS(n, visitados);
+        }
+        // realiza a busca em profundidade em todos os vértices
+            void buscaEmProfundidade(int v) {
+             boolean visitados[] = new boolean[V];
+             DFS(v, visitados);
+            }
+        }
 }
