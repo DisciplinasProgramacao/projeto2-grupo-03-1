@@ -26,7 +26,7 @@ package org.example.domain;
  /** Classe Vertice para um grafo */
 public class Vertice {
     
-    private ABB<Aresta> arestas;    
+    ABB<Aresta> arestas;    
     private final int id;
     private boolean visitado;
 
@@ -137,5 +137,13 @@ public class Vertice {
 
     public ABB<Aresta> getArestas() {    
         return this.arestas;
+    }
+
+    /**
+     * @return array com arestas do vertice
+     */
+    public Aresta[] todasAsArestas() {
+        Aresta[] todasAsArestas = new Aresta[arestas.size()];
+    	return this.arestas.allElements(todasAsArestas);
     }
 }

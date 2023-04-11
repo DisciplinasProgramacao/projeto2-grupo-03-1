@@ -1,5 +1,10 @@
 package org.example.domain;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 public class GrafoMutavel extends Grafo {
 
     public GrafoMutavel(String nome) {
@@ -41,10 +46,36 @@ public class GrafoMutavel extends Grafo {
 
     }
 
-
     public void salvar(String nomeArquivo) {
+        File file = new File("./codigo/data/" + nomeArquivo + ".txt");
+        
+        try {
+        	
+			FileWriter fw = new FileWriter(file);
 
+			Vertice[] arvoreVertices = vertices.allElements(new Vertice[] {});
+
+	        for (Vertice vertice : arvoreVertices) {
+	
+	            Aresta[] todasArestas = vertice.todasAsArestas();
+	
+	            for (Aresta aresta : todasArestas) {
+	
+	                Vertice destino = new Vertice(aresta.destino());
+	                
+	                if (aresta.peso() == -1) {
+	                	fw.write(vertice.getId() + " " + destino.getId()+ "\n");
+	                } else {
+	                	fw.write(vertice.getId() + " " + destino.getId() + " " + aresta.peso() + "\n");
+	                }
+	            }
+	        }
+	        
+	        fw.close();
+	        
+        } catch (IOException e) {
+			e.printStackTrace();
+		}
     }
-
     
 }

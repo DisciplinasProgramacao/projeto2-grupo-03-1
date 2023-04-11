@@ -42,7 +42,7 @@ import java.util.regex.Pattern;
  */
 public class Grafo {
     public final String nome;
-    private ABB<Vertice> vertices;
+    protected ABB<Vertice> vertices;
     private LinkedList<Integer> adj[]; // lista de adjacência
 
     public static Grafo grafoCompleto(int ordem) {
@@ -100,54 +100,6 @@ public class Grafo {
             this.addAresta(list.get(0), list.get(1), list.get(2));
         }
     }
-<<<<<<< Updated upstream
-    
-    /**
-     * Adiciona um método para salvar o grafo
-     * @param nomeArquivo
-     */
-    
-    public void salvar(String nomeArquivo){
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomeArquivo))) {
-            for (int verticeId : vertices.data.keySet()) {
-                Vertice vertice = vertices.find(verticeId);
-                ABB<Aresta> arestas = vertice.getArestas();
-                for (int destinoId : arestas.data.keySet()) {
-                    Aresta aresta = arestas.find(destinoId);
-                    if (verticeId < destinoId) { // Evita duplicidade de arestas no arquivo
-                        String linha = vertice.getId() + " " + aresta.destino() + " " + aresta.peso();
-                        writer.write(linha);
-                        writer.newLine();
-                    }
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("Erro ao salvar o grafo no arquivo: " + e.getMessage());
-        }
-=======
-
-    public void salvar(String nomeArquivo) throws IOException {
-
-        Path path = Paths.get("./data/" + nomeArquivo + ".txt").normalize();
-        PrintWriter writer = new PrintWriter(path.toString());
-        
-        Vertice[] listaVertices = null;
-        listaVertices = vertices.allElements(listaVertices);
-
-        Aresta[] listaArestas = null;
-        listaArestas = arestas.allElements(listaArestas);
-        
-        for (Vertice v : listaVertices) {
-            for(Aresta a : v.listaArestas(v)) {
-                writer.write(v.getId() + " " + a.destino() + " " + a.peso() + "\n");
-            }
-        }
-        
-        
-        writer.close();
->>>>>>> Stashed changes
-    }
-    
 
     /**
      * Adiciona um vértice com o id especificado. Ignora a ação e retorna false se já existir
@@ -307,27 +259,29 @@ public class Grafo {
 /*
  * Realiza a busca em largura
  */
-    public void BFS(int idVertice) {
+    public Grafo BFS(int idVertice) {
         //Cria uma lista de vértices, uma de vizinhos de cada vértice e adciona o vertice inicial de busca
-        Lista<Vertice> listaDeVertices = new Lista<Vertice>();
-        Vertice vertice = vertices.find(idVertice);
-        Lista<Integer> ListaVizinhos = new Lista<Integer>();
-        Integer[] ListaVizinhosInt = new Integer[ListaVizinhos.size()];
-        vertice.visitar();
-        listaDeVertices.add(vertice);
+        Lista<Integer> listaVisitados = new Lista<>();
+        listaVisitados.add(idVertice);
+        LinkedList<Integer> fila = new LinkedList<>();
+        fila.add(idVertice);
 
-        // Até a lista estiver vazia vamos checar todos os vizinhos do vertice
-        while(!listaDeVertices.equals(null)) {
-            listaDeVertices.remove(vertice.getId());
-            ListaVizinhos = vertice.vizinhos();
-            ListaVizinhosInt = ListaVizinhos.allElements(ListaVizinhosInt);
-            for (int i = 0; i < vertice.vizinhos().size(); i++) {
-                if (!vertices.find(ListaVizinhosInt[i]).visitado()) {
-                    vertices.find(ListaVizinhosInt[i]).visitar();
-                    listaDeVertices.add(vertices.find(ListaVizinhosInt[i]));
+        while (fila.size() != 0) {
+            idVertice = fila.poll();
+            Integer[] vizinhos = new Integer[vertices.find(idVertice).vizinhos().size()];
+            vertices.find(idVertice).vizinhos().allElements(vizinhos);
+            
+            for (int i = 0; i < vizinhos.length; i++) {
+                int vertice = vizinhos[i];
+                
+                if(!vertices.find(vertice).visitado()) {
+                    vertices.find(vertice).visitar();
+                    fila.add(vertice);
+                    listaVisitados.add(vertice);
                 }
             }
         }
+        return subGrafo(listaVisitados);                     
     }
 
 }

@@ -23,14 +23,9 @@ class MainTest {
         grafo.addAresta(2, 3, 1);
     }
 
-    @Test
-    void testSalvarGrafo() {
-        grafo.salvar("grafo_salvo.txt");
-        
-    }
 
     @Test
     public void testBFS() {
-
+        
     }
 }
