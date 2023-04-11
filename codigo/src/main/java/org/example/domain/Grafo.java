@@ -26,9 +26,12 @@ package org.example.domain;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -97,6 +100,7 @@ public class Grafo {
             this.addAresta(list.get(0), list.get(1), list.get(2));
         }
     }
+<<<<<<< Updated upstream
     
     /**
      * Adiciona um método para salvar o grafo
@@ -120,7 +124,30 @@ public class Grafo {
         } catch (IOException e) {
             System.out.println("Erro ao salvar o grafo no arquivo: " + e.getMessage());
         }
+=======
+
+    public void salvar(String nomeArquivo) throws IOException {
+
+        Path path = Paths.get("./data/" + nomeArquivo + ".txt").normalize();
+        PrintWriter writer = new PrintWriter(path.toString());
+        
+        Vertice[] listaVertices = null;
+        listaVertices = vertices.allElements(listaVertices);
+
+        Aresta[] listaArestas = null;
+        listaArestas = arestas.allElements(listaArestas);
+        
+        for (Vertice v : listaVertices) {
+            for(Aresta a : v.listaArestas(v)) {
+                writer.write(v.getId() + " " + a.destino() + " " + a.peso() + "\n");
+            }
+        }
+        
+        
+        writer.close();
+>>>>>>> Stashed changes
     }
+    
 
     /**
      * Adiciona um vértice com o id especificado. Ignora a ação e retorna false se já existir
@@ -257,25 +284,54 @@ public class Grafo {
     }
 
     
-        // executa a busca em profundidade a partir do vértice v
-            public void DFS(int idVertice, boolean visitados[]) {
-            // marca o vértice como visitado e o imprime
-            visitados[idVertice] = true;
+    // executa a busca em profundidade a partir do vértice v
+    public void DFS(int idVertice, boolean visitados[]) {
+        // marca o vértice como visitado e o imprime
+        visitados[idVertice] = true;
 
-            // recursivamente, visita todos os vértices adjacentes ao vértice atual
-            Iterator<Integer> i = adj[v].listIterator();
-            while (i.hasNext()) {
-                int n = i.next();
-                if (!visitados[n])
-                    DFS(n, visitados);
-            }
-            // realiza a busca em profundidade em todos os vértices
-                void buscaEmProfundidade(int v) {
-                 boolean visitados[] = new boolean[V];
-                 DFS(v, visitados);
-                }
+        // recursivamente, visita todos os vértices adjacentes ao vértice atual
+        Iterator<Integer> i = adj[v].listIterator();
+        while (i.hasNext()) {
+            int n = i.next();
+            if (!visitados[n])
+                DFS(n, visitados);
         }
+        // realiza a busca em profundidade em todos os vértices
+        void buscaEmProfundidade(int v) {
+            boolean visitados[] = new boolean[V];
+            DFS(v, visitados);
+        }
+    }
+
+
+/*
+ * Realiza a busca em largura
+ */
+    public void BFS(int idVertice) {
+        //Cria uma lista de vértices, uma de vizinhos de cada vértice e adciona o vertice inicial de busca
+        Lista<Vertice> listaDeVertices = new Lista<Vertice>();
+        Vertice vertice = vertices.find(idVertice);
+        Lista<Integer> ListaVizinhos = new Lista<Integer>();
+        Integer[] ListaVizinhosInt = new Integer[ListaVizinhos.size()];
+        vertice.visitar();
+        listaDeVertices.add(vertice);
+
+        // Até a lista estiver vazia vamos checar todos os vizinhos do vertice
+        while(!listaDeVertices.equals(null)) {
+            listaDeVertices.remove(vertice.getId());
+            ListaVizinhos = vertice.vizinhos();
+            ListaVizinhosInt = ListaVizinhos.allElements(ListaVizinhosInt);
+            for (int i = 0; i < vertice.vizinhos().size(); i++) {
+                if (!vertices.find(ListaVizinhosInt[i]).visitado()) {
+                    vertices.find(ListaVizinhosInt[i]).visitar();
+                    listaDeVertices.add(vertices.find(ListaVizinhosInt[i]));
+                }
+            }
+        }
+    }
+
 }
+
 
                 //public void buscaProfundidade(int idVertice) {
                 //    visitado[idVertice] = true;
