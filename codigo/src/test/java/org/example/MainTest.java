@@ -25,7 +25,20 @@ class MainTest {
 
 
     @Test
-    public void testBFS() {
-        
+    public void testBFS() {   
+            GrafoMutavel grafoA = new GrafoMutavel("A");
+            GrafoMutavel grafoB = new GrafoMutavel("B");
+    
+            grafoA.addVertice(1);
+            grafoA.addVertice(2);
+            grafoA.addVertice(3);
+    
+            grafoA.addAresta(1, 2, 0);
+            grafoA.addAresta(2, 3, 0);
+            grafoA.addAresta(1, 3, 0);
+            grafoB = (GrafoMutavel) grafoA.BFS(1);
+            assertNotNull(grafoB.existeAresta(1, 2)); 
     }
+
+    
 }

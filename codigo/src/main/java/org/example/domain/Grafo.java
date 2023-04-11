@@ -171,8 +171,8 @@ public class Grafo {
         return this.vertices.find(vertice);
     }
 
-    public Grafo subGrafo(Lista<Integer> vertices){
-        Grafo subgrafo = new Grafo("Subgrafo de " + this.nome);
+    public GrafoMutavel subGrafo(Lista<Integer> vertices){
+        GrafoMutavel subgrafo = new GrafoMutavel("Subgrafo de " + this.nome);
         //Vertice[] listaVertices = this.vertices.allElements(new Vertice[this.vertices.size()]);
 
         //coleta os indices da lista-parametro
@@ -199,11 +199,6 @@ public class Grafo {
             }
         }
        
-        // for (Aresta a : vertices.allElements()) {
-        //     if (subgrafo.existeVertice(a.destino()) && subgrafo.existeVertice(a.visitada())) {
-        //     subgrafo.addAresta(v, a.destino()); 
-        //     }
-        // }
           return subgrafo;  
 
     }
@@ -259,7 +254,7 @@ public class Grafo {
 /*
  * Realiza a busca em largura
  */
-    public Grafo BFS(int idVertice) {
+    public GrafoMutavel BFS(int idVertice) {
         //Cria uma lista de vértices, uma de vizinhos de cada vértice e adciona o vertice inicial de busca
         Lista<Integer> listaVisitados = new Lista<>();
         listaVisitados.add(idVertice);
