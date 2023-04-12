@@ -232,13 +232,17 @@ public class Grafo {
 
     
     // executa a busca em profundidade 
-    public Grafo buscaProfundidade(int idVertice) {
-        Grafo DFS = new Grafo();
-        vertice.visitado[idVertice] = true;
-        List<Integer> vizinhos = grafo.getVizinhos(idVertice);
+    public GrafoMutavel buscaProfundidade(int idVertice) {
+        GrafoMutavel DFS = new GrafoMutavel("A");
+        DFS.addVertice(idVertice);
+        vertices.find(idVertice).visitar();
+        Integer[] vizinhos = new Integer[vertices.find(idVertice).vizinhos().size()];
+        vertices.find(idVertice).vizinhos().allElements(vizinhos);
         for (int vizinho : vizinhos) {
-            if (!vertice.visitado[vizinho]) {
-                vertice.visitado[vizinho] = true;
+            if (!vertices.find(vizinho).visitado()) {
+                DFS.addVertice(vizinho);
+                Vertice v = vertices.find(vizinho);
+                v.visitar();
                 DFS.addAresta(idVertice, vizinho);
                 buscaProfundidade(vizinho);
             }
